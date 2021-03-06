@@ -18,6 +18,8 @@ function show_intro(&$center, &$landingpage) {
         <form action="/login">
           <button class="btn btn-primary">Login</button>
         </form>
+<?php
+/* FRI -- Se non sei loggato non accedi al testo o agli esercizi
         <h1>No login...?</h1>
         <form action="/users/sign_up">
           <button class="btn btn-outline-dark">Sign up for free</button>
@@ -29,6 +31,8 @@ function show_intro(&$center, &$landingpage) {
           <button class="btn btn-outline-dark">Try an exercise</button>
         </form>
         </form>
+*/
+?>
 <?php
 }
 
@@ -60,13 +64,15 @@ function logos() {
     echo "    <h2>Partners behind BibleOL</h2>";
     echo "  </div>";
     echo "  <div class=\"row logopanel\">";
-    echo "    <div class=\"col-md-3\">";
+    echo "    <div class=\"col-md-2\">";
+    echo "      <a class=\"navbar-link\" href=\"http://www.biblicalstudies.eu\" target=\"_blank\"><img class=\"logo\" src=\"images/Logo SIRBIS Corretto.png\" style=\"width: 140px; allign: center;\"></a></div>";
+    echo "    <div class=\"col-md-2\">";
     echo "      <a class=\"navbar-link\" href=\"http://www.ezer.dk\" target=\"_blank\"><img class=\"logo\" src=\"images/logos/ezer_web_trans_lille.png\" style=\"width: 140px; allign: center;\"></a></div>";
-    echo "    <div class=\"col-md-3\">";
+    echo "    <div class=\"col-md-2\">";
     echo "      <a class=\"navbar-link\" href=\"http://vu.nl\" target=\"_blank\"><img class=\"logo\" src=\"images/logos/vu.png\" style=\"width: 260px\"></a></div>";
-    echo "    <div class=\"col-md-3\">";
+    echo "    <div class=\"col-md-2\">";
     echo "      <a class=\"navbar-link\" href=\"http://pthu.nl\" target=\"_blank\"><img class=\"logo\"  src=\"images/logos/pthu.png\" style=\"width: 260px\"></a></div>";
-    echo "    <div class=\"col-md-3\">";
+    echo "    <div class=\"col-md-2\">";
     echo "      <a class=\"navbar-link\"  href=\"http://3bmoodle.dk\" target=\"_blank\"><img class=\"logo\" src=\"images/logos/3bm_logo.png\" style=\"width: 150px\"></a></div>";
     echo "  </div>";
 }

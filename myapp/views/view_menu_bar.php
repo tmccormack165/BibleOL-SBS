@@ -85,7 +85,9 @@ else {
  
 $cols = $ix+1;
  
+// FRI -- Mostro la barra superiore solo se ho effettuato il login
 ?>
+<?php if ($this->mod_users->is_logged_in()): ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light pt-0 pb-0 mb-3">
   <div class="divnavbar">
   <a class="navbar-brand d-block d-lg-none" href="<?= site_url('/') ?>"><img alt="" src="/images/BibleOL_logo.png" style="max-width: 100%; height: 60px; padding: 8px"></a>
@@ -146,6 +148,7 @@ $cols = $ix+1;
     </div>
   </div>
 </nav>
+<?php endif; ?>
 
 <div class="container-fluid">
   <!-- <div class="row"> -->
