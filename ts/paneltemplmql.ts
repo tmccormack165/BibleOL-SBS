@@ -1513,7 +1513,7 @@ abstract class PanelTemplMql {
                 }
             });
         }
-        this.groups[key].append(group_tabs).tabs();
+	(<any>this.groups[key].append(group_tabs)).tabs();
         this.handlers.push(elfh);
     }
 

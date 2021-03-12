@@ -6,6 +6,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -1201,6 +1203,7 @@ var Dictionary = (function () {
         var mix = +$(x_this).attr("data-mix");
         var sengram = configuration.sentencegrammar[level];
         var res = '<table>';
+        console.log(sengram);
         if (set_head) {
             res += "<tr>\n                        <td colspan=\"2\" class=\"tooltiphead\">" + getObjectFriendlyName(sengram.objType) + "</td>\n                    </tr>";
         }
@@ -1229,12 +1232,18 @@ var Dictionary = (function () {
                             wordclass = charset.transliteratedClass;
                         else
                             wordclass = '';
-                        res += "<tr>\n                                                           <td>" + map[featName] + "</td>\n                                                           <td class=\"bol-tooltip leftalign " + wordclass + "\">" + featValLoc + "</td>\n                                                       </tr>";
+                        if (!((featValLoc === '-')
+                            || (featValLoc === '---'))) {
+                            res += "<tr>\n                                                               <td>" + map[featName] + "</td>\n                                                               <td class=\"bol-tooltip leftalign " + wordclass + "\">" + featValLoc + "</td>\n                                                           </tr>";
+                        }
                     }
                     break;
                 case WHAT.metafeature:
                     if (mayShowFeature(objType, origObjType, featName, sgiObj)) {
-                        res += "<tr>\n                                                           <td>" + map[featName] + "</td>\n                                                           <td class=\"bol-tooltip leftalign\">" + featValLoc + "</td>\n                                                       </tr>";
+                        if (!((featValLoc === '-')
+                            || (featValLoc === '---'))) {
+                            res += "<tr>\n                                                               <td>" + map[featName] + "</td>\n                                                               <td class=\"bol-tooltip leftalign\">" + featValLoc + "</td>\n                                                           </tr>";
+                        }
                     }
                     break;
                 case WHAT.groupstart:

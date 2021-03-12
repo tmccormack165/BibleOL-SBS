@@ -39,9 +39,9 @@ class PanelTemplSentenceSelector extends PanelTemplMql {
         // Set handler for changes to the 'use for sentence unit selection' checkbox
 	this.cbUseForQo.click(() => {
             if (this.cbUseForQo.is(':checked'))
-                this.templTabs.tabs('disable',3);
+	        (<any>this.templTabs).tabs('disable',3);
             else
-                this.templTabs.tabs('enable',3);
+	        (<any>this.templTabs).tabs('enable',3);
 
             this.populateFeatureTab(null);
             this.dirty = true;
@@ -56,11 +56,11 @@ class PanelTemplSentenceSelector extends PanelTemplMql {
         // Handle initial setting of 'use for sentence unit selection'
 	if (this.initialMd==null || this.initialMd.useForQo) {
             this.cbUseForQo.prop('checked',true);
-            this.templTabs.tabs('disable',3);
+	    (<any>this.templTabs).tabs('disable',3);
         }
         else {
             this.cbUseForQo.prop('checked',false);
-            this.templTabs.tabs('enable',3);
+	    (<any>this.templTabs).tabs('enable',3);
         }
 
         // Set handler for for 'Import from SHEBANQ' button
@@ -90,7 +90,7 @@ class PanelTemplSentenceSelector extends PanelTemplMql {
 	    this.featSelLab.addClass('disabled');
             this.cbUseForQoLabel.addClass('disabled');
             this.cbUseForQo.prop('checked', false); // We must use sentence unit selection if MQL is enabled
-            this.templTabs.tabs('enable',3);
+	    (<any>this.templTabs).tabs('enable',3);
             this.importShebanq.prop('disabled',false);
         }
         else {

@@ -38,7 +38,7 @@
     </div>
 
     <div id="textarea">
-    <?php if (!$is_quiz && $shebanq_link): ?>
+    <?php if (!$is_quiz && $shebanq_link && $this->mod_users->is_admin()): ?>
         <div style="float:right;"><a href="<?= $shebanq_link ?>" title="Find chapter at SHEBANQ" target="shebanq"><img src="<?= site_url('/images/shebanq_logo32.png') ?>" alt=""></a></div>
       <?php endif; ?>
     </div>

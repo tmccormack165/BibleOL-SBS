@@ -75,8 +75,8 @@ class Quiz {
                 
             }, timeBeforeHbOpen);
 
-            let heartbeatDialog = $('<div></div>')
-                .html(localize('done_practicing'))
+	    let heartbeatDialog = (<any>$('<div></div>')
+                .html(localize('done_practicing')))
                 .dialog({
                     autoOpen: false,
                     title: localize('stop_practicing'),
@@ -124,7 +124,7 @@ class Quiz {
             if (supportsProgress)
                 $('progress#progress').attr('value',this.currentDictIx+1).attr('max',dictionaries.sentenceSets.length);
             else
-                $('div#progressbar').progressbar({value: this.currentDictIx+1, max: dictionaries.sentenceSets.length});
+                (<any>$('div#progressbar')).progressbar({value: this.currentDictIx+1, max: dictionaries.sentenceSets.length});
             $('#progresstext').html((this.currentDictIx+1)+'/'+dictionaries.sentenceSets.length);
             
             // Create a panel for the next question

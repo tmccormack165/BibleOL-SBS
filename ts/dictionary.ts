@@ -229,7 +229,7 @@ class Dictionary {
         
         if (useTooltip) {
             // Use the tooltip function of JQuery UI.
-            $(document).tooltip(
+	    (<any>$(document)).tooltip(
                 {
                     items: "[data-idd]",
                     disabled: false, 
@@ -272,7 +272,7 @@ class Dictionary {
         // All display objects are identified with a "data-idd" attribute in the displaying HTML element.
         
         if (useTooltip)
-            $(document).tooltip({items: "[data-idd]", disabled: true});
+	    (<any>$(document)).tooltip({items: "[data-idd]", disabled: true});
         else
             $("[data-idd]").off("mouseenter mouseleave");
     }
@@ -487,19 +487,29 @@ class Dictionary {
                                                    wordclass = charset.transliteratedClass;
                                                else
                                                    wordclass = '';
-                                               res += `<tr>
-                                                           <td>${map[featName]}</td>
-                                                           <td class="bol-tooltip leftalign ${wordclass}">${featValLoc}</td>
-                                                       </tr>`;
+                                               if (!(
+                                                   (featValLoc==='-')
+                                               ||  (featValLoc==='---')
+                                               )) {
+                                                   res += `<tr>
+                                                               <td>${map[featName]}</td>
+                                                               <td class="bol-tooltip leftalign ${wordclass}">${featValLoc}</td>
+                                                           </tr>`;
+                                               }
                                            }
                                            break;
 
                                        case WHAT.metafeature:
                                            if (mayShowFeature(objType, origObjType, featName, sgiObj)) {
-                                               res += `<tr>
-                                                           <td>${map[featName]}</td>
-                                                           <td class="bol-tooltip leftalign">${featValLoc}</td>
-                                                       </tr>`;
+                                               if (!(
+                                                   (featValLoc==='-')
+                                               ||  (featValLoc==='---')
+                                               )) {
+                                                   res += `<tr>
+                                                               <td>${map[featName]}</td>
+                                                               <td class="bol-tooltip leftalign">${featValLoc}</td>
+                                                           </tr>`;
+                                               }
                                            }
                                            break;
 

@@ -484,7 +484,7 @@ setTimeout(function() {
     // Show the exercise description in the text editor
     ckeditor.val(decoded_3et.desc);
 
-    $('#quiz_tabs').tabs({ disabled: [3] }); // Set up the tabs with the "sentence unit selection" tab disabled
+    (<any>$('#quiz_tabs')).tabs({ disabled: [3] }); // Set up the tabs with the "sentence unit selection" tab disabled
 
     origMayLocate = decoded_3et.maylocate;
     $('#maylocate_cb').prop('checked', origMayLocate);

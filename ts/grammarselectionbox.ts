@@ -454,26 +454,26 @@ class GrammarSelectionBox {
     //
     public static buildGrammarAccordion(): string {
 
-        let tabs1: JQuery = $('#myview').tabs({
+        let tabs1: JQuery = (<any>$('#myview')).tabs({
             heightStyle: 'content',
             collapsible: true,
         });
 
-        let tabs2: JQuery = $('#gramtabs').tabs({
+        let tabs2: JQuery = (<any>$('#gramtabs')).tabs({
             heightStyle: 'content',
             collapsible: true,
         });
 
-        let tabs3: JQuery = $('#grammargroup').tabs({
+        let tabs3: JQuery = (<any>$('#grammargroup')).tabs({
             heightStyle: 'content',
             collapsible: true,
         });
         
         let max_width = 'auto';
 
-        tabs1.tabs('option', 'active', false);
-        tabs2.tabs('option', 'active', false);
-        tabs3.tabs('option', 'active', false);
+        (<any>tabs1).tabs('option', 'active', false);
+        (<any>tabs2).tabs('option', 'active', false);
+        (<any>tabs3).tabs('option', 'active', false);
 
         return max_width;
     }
