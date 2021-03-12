@@ -1352,3 +1352,8 @@ footer .row {
 .logopanel h2 {
   margin: auto;
 }
+.logopanel {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

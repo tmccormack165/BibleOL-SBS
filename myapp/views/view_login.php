@@ -24,9 +24,13 @@
         <input class="btn btn-primary" type="submit" name="submit" value="<?= $this->lang->line('login_button') ?>" />
       </form>
 
+<?php
+/*
       <p style="height:2px">&nbsp;</p>
       <p><a href="<?= site_url('/users/forgot_pw') ?>"><?= $this->lang->line('forgotten') ?></a></p>
       <p><a href="<?= site_url('/users/sign_up') ?>"><?= $this->lang->line('sign_up') ?></a></p>
+*/
+?>
     </div>
   </div>
    
