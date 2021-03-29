@@ -52,6 +52,10 @@ class Ctrl_text extends MY_Controller {
             }
 
             // VIEW:
+if (!$this->mod_users->is_logged_in()) {
+  die();
+}
+
             $this->load->view('view_top1', array('title' => $this->lang->line('select_text')));
             $this->load->view('view_top2');
             $this->load->view('view_menu_bar', array('langselect' => true));
@@ -105,6 +109,10 @@ class Ctrl_text extends MY_Controller {
 
 
             // VIEW:
+if (!$this->mod_users->is_logged_in()) {
+  die();
+}
+
             $this->load->view('view_top1', array('title' => $this->mod_askemdros->book_title,
                                                  'js_list'=>array('js/ol.js')));
             $this->load->view('view_font_css', array('fonts' => $this->mod_askemdros->font_selection));
@@ -137,6 +145,10 @@ class Ctrl_text extends MY_Controller {
             $dirlist = $this->mod_quizpath->dirlist(true);
 
             // VIEW:
+if (!$this->mod_users->is_logged_in()) {
+  die();
+}
+
             $this->load->view('view_top1', array('title' => $this->lang->line('directory')));
             $this->load->view('view_top2');
             $this->load->view('view_menu_bar', array('langselect' => true));
@@ -205,6 +217,10 @@ class Ctrl_text extends MY_Controller {
 	public function show_quiz_sel() {
         if (!isset($_POST['quiz']) || !isset($_POST['count']) || !isset($_POST['sel'])) {
             // VIEW:
+if (!$this->mod_users->is_logged_in()) {
+  die();
+}
+
             $this->load->view('view_top1', array('title' => $this->lang->line('quiz')));
             $this->load->view('view_top2');
             $this->load->view('view_menu_bar', array('langselect' => true));
@@ -291,6 +307,10 @@ class Ctrl_text extends MY_Controller {
             $this->load->library('universe_tree', array('markedList' => $this->mod_askemdros->universe));
 
             // VIEW:
+if (!$this->mod_users->is_logged_in()) {
+  die();
+}
+
             $this->load->view('view_top1', array('title' => $this->lang->line('select_passages'),
                                                  'css_list'=>array('styles/jstree.css'),
                                                  'js_list'=>array('jstree/jquery.jstree.js')));
@@ -372,6 +392,10 @@ class Ctrl_text extends MY_Controller {
             }
 
             //  View
+if (!$this->mod_users->is_logged_in()) {
+  die();
+}
+
             $this->load->view('view_top1', array('title' => $this->lang->line('edit_quiz'),
                                                  'css_list' => array('styles/jstree.css'),
                                                  'js_list' => $javascripts));
@@ -451,6 +475,10 @@ class Ctrl_text extends MY_Controller {
 
 
             //  View
+if (!$this->mod_users->is_logged_in()) {
+  die();
+}
+
             $this->load->view('view_top1', array('title' => $this->lang->line('edit_quiz'),
                                                  'css_list' => array('styles/jstree.css'),
                                                  'js_list' => $javascripts));
