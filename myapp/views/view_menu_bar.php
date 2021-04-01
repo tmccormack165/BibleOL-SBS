@@ -64,7 +64,7 @@ if ($this->mod_users->is_logged_in()) {
  
     $ix = count($head);
     $head[] = $this->lang->line('user_access');
-    $content[$ix][] = make_anchor2('login', 'logout');
+    $content[$ix][] = '<a href="https://login.bitblos.net/logout" class="dropdown-item">' . get_instance()->lang->line('logout') . '</a>';
     $content[$ix][] = make_anchor2('privacy', 'privacy_policy');
 }
 elseif ($this->mod_users->is_logged_in_noaccept()) {
