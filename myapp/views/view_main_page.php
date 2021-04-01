@@ -14,10 +14,12 @@ function show_intro(&$center, &$landingpage) {
         </div>
       </div>
       <div class="col-md-4" id="loginpanel">
+<?php if (false): ?>
         <h1>Press the button to login</h1>
         <form action="/login">
           <button class="btn btn-primary">Login</button>
         </form>
+<?php endif ?>
 <?php
 /* FRI -- Se non sei loggato non accedi al testo o agli esercizi
         <h1>No login...?</h1>
