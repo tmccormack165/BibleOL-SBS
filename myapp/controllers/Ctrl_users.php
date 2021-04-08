@@ -359,6 +359,7 @@ class Ctrl_users extends MY_Controller {
                 $this->form_validation->set_rules('preflang', '', '');
                 $this->form_validation->set_rules('prefvariant', '', '');
 
+		/*
                 if ($userid>0) {
                     // Extra validation when editing an existing user
                     $this->form_validation->set_rules('password1', $this->lang->line('new_password'),
@@ -371,6 +372,7 @@ class Ctrl_users extends MY_Controller {
                                                       'trim|required|min_length['.self::MIN_PW_LENGTH.']|matches[password2]');
                     $this->form_validation->set_rules('password2', $this->lang->line('repeat_password'), 'trim|required');
                 }
+		 */
 
                 if ($this->form_validation->run()) {
                     $user_info->first_name = $this->input->post('first_name');
@@ -496,9 +498,11 @@ class Ctrl_users extends MY_Controller {
                $this->form_validation->set_rules('preflang', '', '');
                $this->form_validation->set_rules('prefvariant', '', '');
 
+	       /*
                $this->form_validation->set_rules('password1', $this->lang->line('new_password'),
                                                  'trim|matches[password2]|callback_password_length_check');
                $this->form_validation->set_rules('password2', $this->lang->line('repeat_new_password'), 'trim');
+		*/
 
 
                if ($this->form_validation->run()) {

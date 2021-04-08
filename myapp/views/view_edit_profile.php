@@ -85,6 +85,8 @@
             <td class="nolb"></td>
           </tr>
         <?php endif; ?>
+<?php
+/*
         <tr>
           <td><?= $this->lang->line('new_password') ?></td>
           <td class="norb"><input type="password" name="password1" value=""></td>
@@ -95,6 +97,8 @@
           <td class="norb"><input type="password" name="password2" value=""></td>
           <td class="nolb"><?= $this->lang->line('leave_blank_pw') ?></td>
         </tr>
+*/
+?>
       </table>
       <p style="height:2px">&nbsp;</p>
       <p><input class="btn btn-primary" type="submit" name="submit" value="<?= $this->lang->line('OK_button') ?>">
