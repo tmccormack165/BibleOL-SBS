@@ -124,6 +124,7 @@ if (!$this->mod_users->is_logged_in()) {
                                                          'quizData_json' => 'null',
                                                          'dbinfo_json' => $this->mod_askemdros->dbinfo_json,
                                                          'dictionaries_json' => $this->mod_askemdros->dictionaries_json,
+                                                         'bdb_json' => $this->mod_askemdros->bdb_json,
                                                          'l10n_json' => $this->mod_askemdros->l10n_json,
                                                          'l10n_js_json' => $this->mod_localize->get_json(),
                                                          'typeinfo_json' => $this->mod_askemdros->typeinfo_json,

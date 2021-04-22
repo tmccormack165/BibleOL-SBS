@@ -94,6 +94,7 @@
     var useTooltip = <?= $useTooltip_str ?>;
     var configuration = <?= $dbinfo_json ?>;
     var dictionaries = <?= $dictionaries_json ?>;
+    var bdb = <?= $bdb_json ?>;
     var l10n = <?= $l10n_json ?>;
     var l10n_js = <?= $l10n_js_json ?>;
     var typeinfo = <?= $typeinfo_json ?>;
