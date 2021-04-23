@@ -4,6 +4,7 @@ function getBDBEntry($lexeme_with_variant) {
 	// Converto il lessema in un array di caratteri Unicode
 	$arr = preg_split("//u", $lexeme_with_variant, -1, PREG_SPLIT_NO_EMPTY);
 
+	/*
 	// Prima di normalizzare debbo togliere gli accenti (da U+0591 a U+05AF)
 	$arr = array_filter($arr, function ($x) { return (mb_ord($x) < 0x0591) or (mb_ord($x) > 0x05AF); });
 
@@ -20,6 +21,13 @@ function getBDBEntry($lexeme_with_variant) {
 
 	// Sostituisco Holam + Vav con Vav + Holam Haser
 	$lemma = mb_ereg_replace("\x{05B9}\x{05D5}", "\u{05D5}\u{05BA}", $lemma);
+	*/
+
+	// Provo a togliere tutte le vocali
+	$arr = array_filter($arr, function ($x) { return (mb_ord($x) >= 0x05D0) and (mb_ord($x) <= 0x05EA); });
+
+	// Normalizzo il lemma, di modo da avere le vocali sempre nello stesso ordine
+	$lemma = implode($arr);
 
 	$db = new SQLite3('db/bdb.db',	SQLITE3_OPEN_READONLY);
 	$statement = $db->prepare('SELECT content FROM bdb WHERE term = ?');
