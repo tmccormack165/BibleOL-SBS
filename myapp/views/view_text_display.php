@@ -1,5 +1,7 @@
 <div class="row">
-<div class="col-lg-3">
+<div id="bdbcontainer" class="col-lg-3 col-md-4">
+  <div id="lemma">LEMMA</div>
+  <div id="bdbtext">BDB</div>
 </div>
 
 <div class="col-lg-6 col-md-8">

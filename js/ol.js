@@ -1203,7 +1203,6 @@ var Dictionary = (function () {
         var mix = +$(x_this).attr("data-mix");
         var sengram = configuration.sentencegrammar[level];
         var res = '<table>';
-        console.log(sengram);
         if (set_head) {
             res += "<tr>\n                        <td colspan=\"2\" class=\"tooltiphead\">" + getObjectFriendlyName(sengram.objType) + "</td>\n                    </tr>";
         }
@@ -1234,6 +1233,10 @@ var Dictionary = (function () {
                             wordclass = '';
                         if (!((featValLoc === '-')
                             || (featValLoc === '---'))) {
+                            if (featName === 'g_voc_lex_utf8_variant') {
+                                $('#lemma').text(featValLoc);
+                                $('#bdbtext').html(bdb[featValLoc] || '');
+                            }
                             res += "<tr>\n                                                               <td>" + map[featName] + "</td>\n                                                               <td class=\"bol-tooltip leftalign " + wordclass + "\">" + featValLoc + "</td>\n                                                           </tr>";
                         }
                     }

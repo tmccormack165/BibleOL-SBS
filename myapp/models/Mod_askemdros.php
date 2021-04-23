@@ -10,6 +10,10 @@ function getBDBEntry($lexeme_with_variant) {
 	// Normalizzo il lemma, di modo da avere le vocali sempre nello stesso ordine
 	$lemma = normalizer_normalize(implode($arr));
 
+	// Ci possono essere numeri romani dopo il lemma, quindi utilizzo solo la prima parola
+	$words = preg_split('/\s+/', $lemma, -1, PREG_SPLIT_NO_EMPTY);
+	$lemma = $words[0];
+
 	$db = new SQLite3('db/bdb.db',	SQLITE3_OPEN_READONLY);
 	$statement = $db->prepare('SELECT content FROM bdb WHERE term = ?');
 	$statement->bindValue(1, $lemma);
@@ -483,28 +487,23 @@ class Mod_askemdros extends CI_Model {
 			$this->l10n_json = $this->db_config->l10n_json;
 			$this->typeinfo_json = $this->db_config->typeinfo_json;
 
-		error_log('------------- BEGIN dictionaries_json -------------');
-		error_log($this->dictionaries_json);
-		error_log('------------- END dictionaries_json -------------');
-		error_log('------------- BEGIN monadObjects -------------');
+		// BEGIN -- FRI
 		$bdb = array();
 		foreach ($this->dictionary->monadObjects as $sentenceIndex) {
 			foreach ($sentenceIndex as $grammarLevel) {
 				foreach ($grammarLevel as $obj) {
-					if ((!is_null($obj->mo->features)) && array_key_exists('g_voc_lex_utf8', $obj->mo->features)) {
-						$lexeme_with_variant = $obj->mo->features['g_voc_lex_utf8'];
+					if ((!is_null($obj->mo->features)) && array_key_exists('g_voc_lex_utf8_variant', $obj->mo->features)) {
+						$lexeme_with_variant = $obj->mo->features['g_voc_lex_utf8_variant'];
 						$bdb_entry = getBDBEntry($lexeme_with_variant);
-						if (is_null($bdb_entry)) {
-							error_log($lexeme_with_variant);
-						} else {
+						if (!is_null($bdb_entry)) {
 							$bdb[$lexeme_with_variant] = $bdb_entry;
 						}
 					}
 				}
 			}
 		}
+		// END -- FRI
 		$this->bdb_json = json_encode($bdb);
-		error_log('------------- END monadObjects -------------');
 		}
 		catch (MqlException $e) {
 			if (!empty($e->db_error)) 
