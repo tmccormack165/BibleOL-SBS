@@ -12,7 +12,14 @@ function getBDBEntry($lexeme_with_variant) {
 
 	// Ci possono essere numeri romani dopo il lemma, quindi utilizzo solo la prima parola
 	$words = preg_split('/\s+/', $lemma, -1, PREG_SPLIT_NO_EMPTY);
+	if (count($words) < 1) {
+		return null;
+	}
+
 	$lemma = $words[0];
+
+	// Sostituisco Holam + Vav con Vav + Holam Haser
+	$lemma = mb_ereg_replace("\x{05B9}\x{05D5}", "\u{05D5}\u{05BA}", $lemma);
 
 	$db = new SQLite3('db/bdb.db',	SQLITE3_OPEN_READONLY);
 	$statement = $db->prepare('SELECT content FROM bdb WHERE term = ?');
@@ -497,6 +504,11 @@ class Mod_askemdros extends CI_Model {
 						$bdb_entry = getBDBEntry($lexeme_with_variant);
 						if (!is_null($bdb_entry)) {
 							$bdb[$lexeme_with_variant] = $bdb_entry;
+						} else if (array_key_exists('g_lex_utf8', $obj->mo->features)) {
+							$bdb_entry = getBDBEntry($obj->mo->features['g_lex_utf8']);
+							if (!is_null($bdb_entry)) {
+								$bdb[$lexeme_with_variant] = $bdb_entry;
+							}
 						}
 					}
 				}
