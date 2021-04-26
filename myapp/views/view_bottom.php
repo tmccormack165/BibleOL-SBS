@@ -18,7 +18,7 @@
           <div class="col-md-4 footer footer-column">
             <h2>Follow us</h2>
             <img src="/images/dadel/facebook.png" style="height: 35px;">
-            <a class="social" href="https://www.facebook.com/SIRBISCH">Join our language community</a>
+            <a class="social" href="https://www.facebook.com/SIRBISCH" target="_blank" rel="noopener noreferrer">Join our language community</a>
           </div>
           <div class="col-md-4 footer footer-column">
             <p></p>
@@ -26,7 +26,7 @@
         </div>
         <div class="row">
           <div class="footer footer-bottom">
-            <p>&copy; Copyright 2021 The Swiss Insitute of Research in Biblical Studies</p>
+            <p>&copy; Copyright 2021 The Swiss Institute of Research in Biblical Studies</p>
           </div>
         </div>
       </footer>    
