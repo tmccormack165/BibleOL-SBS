@@ -241,23 +241,22 @@ class Dictionary {
             // Poplulate the <div class="grammardisplay"> element with grammar information when the
             // mouse hovers over a displayed object.
             $("[data-idd]")
-                .hover(
-                    function() {
+		$("[data-idd]").on('click', (event : any) => {
                         // Calculate vertical position of '.grammardisplay'.
                         // It should be placed at least 20px from top of window but not higher
                         // than '#textcontainer'
                         let scrTop   : number = $(window).scrollTop();
                         let qcTop    : number = $('#textcontainer').offset().top;
+			    let [contents, heading] : [string, string] = this.toolTipFunc(event.currentTarget, true);
                         $('.grammardisplay')
-                            .html(thisDict.toolTipFunc(this, true)[0])
+                            .html(contents)
                             .css('top',Math.max(0,scrTop-qcTop+5))
                             .outerWidth($('#grammardisplaycontainer').outerWidth()-25) // 25px is a littel more than margin-right
                             .show();
-                    },
-                    function () {
-                        $('.grammardisplay').hide();
-                    }
-                );
+
+		       $('#bdbtext')
+                            .css('top',Math.max(0,scrTop-qcTop+5));
+                    });
         }
     }
 
@@ -287,12 +286,14 @@ class Dictionary {
     private clickForGrammar() {
         // All display objects are identified with a "data-idd" attribute in the displaying HTML element.
 
+	/*
         $("[data-idd]").on('click', (event : any) => {
             let [contents, heading] : [string, string] = this.toolTipFunc(event.currentTarget, false);
             $('#grammar-info-label').html(heading);
             $('#grammar-info-body').html(contents);
             ($('#grammar-info-dialog') as any).modal('show');
         });
+	*/
     }
 
     //------------------------------------------------------------------------------------------
@@ -308,7 +309,8 @@ class Dictionary {
         switch (resizer.getWindowSize()) {
         case 'xs':
         case 'sm':
-            thisDict.dontHoverForGrammar(); // Disable grammar information box
+	//thisDict.dontHoverForGrammar(); // Disable grammar information box
+            thisDict.hoverForGrammar(); // Enable grammar information box
             break;
 
         default:
@@ -493,7 +495,6 @@ class Dictionary {
                                                ||  (featValLoc==='---')
                                                )) {
                                                    if (featName === 'g_voc_lex_utf8_variant') {
-                                                       $('#lemma').text(featValLoc);
 						       $('#bdbtext').html(bdb[featValLoc] || '');
                                                    }
                                                    res += `<tr>

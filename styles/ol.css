@@ -1357,6 +1357,15 @@ footer .row {
   justify-content: space-around;
   align-items: center;
 }
+#bdbcontainer {
+  position: relative;
+}
+#bdbtext {
+  position: relative;
+  background: white;
+  border: solid 1px #adadad;
+  padding: 10px;
+}
 #bdbtext bdbheb,
 #bdbtext bdbarc,
 #bdbtext heb {
@@ -1394,4 +1403,10 @@ footer .row {
 #bdbtext ref {
   color: navy;
   font-weight: bold;
+}
+#bdbtext hr {
+  border: 1px solid green;
+  border-radius: 5px;
+  height: 10px;
+  background: green;
 }

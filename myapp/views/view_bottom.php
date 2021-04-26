@@ -10,15 +10,15 @@
       <footer>
         <div class="row">
           <div class="col-md-4 footer footer-column">
-            <h2>About BibleOL</h2>
-            <p>BibleOL is an online learning platform for training the Biblical languages Hebrew and Greek. It utilizes top-notch language databases to provide students the best learning experience.</p>
+            <h2>About BibleLA</h2>
+            <p>The Bible for Linguistic Analysis (BibleLA) is an online platform for training and studying Biblical Hebrew and New Testament Greek. It utilizes top-notch language databases to provide students the best learning experience.</p>
             <p>Enjoy!</p>
             <a href="/privacy">| Privacy Policy |</a>
           </div>
           <div class="col-md-4 footer footer-column">
-            <h2>Follow BibleOL</h2>
+            <h2>Follow us</h2>
             <img src="/images/dadel/facebook.png" style="height: 35px;">
-            <a class="social" href="">Join our language community</a>
+            <a class="social" href="https://www.facebook.com/SIRBISCH">Join our language community</a>
           </div>
           <div class="col-md-4 footer footer-column">
             <p></p>
@@ -26,7 +26,7 @@
         </div>
         <div class="row">
           <div class="footer footer-bottom">
-            <p>&copy; Copyright 2020</p>
+            <p>&copy; Copyright 2021 The Swiss Insitute of Research in Biblical Studies</p>
           </div>
         </div>
       </footer>    

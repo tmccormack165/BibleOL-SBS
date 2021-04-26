@@ -30,7 +30,9 @@ if ($this->mod_users->is_logged_in()) {
     //$content[$ix][] = make_anchor2('statistics', 'statistics');
     $content[$ix][] = make_anchor2('config', 'font_preferences');
     $content[$ix][] = make_anchor2('users/profile', 'profile');
+if ($this->mod_users->is_admin()) {
     $content[$ix][] = make_anchor2('userclass/enroll', 'enroll_in_class');
+}
     $content[$ix][] = make_anchor2('statistics/student_time', 'my_progress');
 
     if ($this->mod_users->is_teacher())

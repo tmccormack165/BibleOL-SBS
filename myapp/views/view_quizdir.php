@@ -23,15 +23,18 @@
   <?php endif; ?>
 
   <?php foreach ($dirlist['directories'] as $d): ?>
+      <?php if ($d[1]): /* Directory is visible to user */ ?>
     <p>
       <span class="fas fa-folder" style="display:inline-block;"></span>
-      <?php if ($d[1]): /* Directory is visible to user */ ?>
         <?= anchor(build_get('text/select_quiz',array('dir' => composedir($dirlist['relativedir'], $d[0]))), $d[0]) ?>
-      <?php else: ?>
+    </p>
+      <?php elseif ($this->mod_users->is_admin()): ?>
+    <p>
+      <span class="fas fa-folder" style="display:inline-block;"></span>
         <?= anchor(build_get('userclass/enroll_by_folder',array('dir' => composedir($dirlist['relativedir'], $d[0]),
                                                                 'curdir' => $curdir)), $d[0]) ?> <?= $this->lang->line('restricted_access') ?>
-      <?php endif; ?>
     </p>
+      <?php endif; ?>
   <?php endforeach; ?>
 <?php endif; ?>
 

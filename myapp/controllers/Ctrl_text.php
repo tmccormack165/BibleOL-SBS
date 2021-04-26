@@ -129,7 +129,7 @@ if (!$this->mod_users->is_logged_in()) {
                                                          'l10n_js_json' => $this->mod_localize->get_json(),
                                                          'typeinfo_json' => $this->mod_askemdros->typeinfo_json,
                                                          'shebanq_link' => $shebanq_link));
-            $this->load->view('view_bottom');
+            //$this->load->view('view_bottom');
         }
         catch (DataException $e) {
             $this->error_view($e->getMessage(), $this->lang->line('show_text'));

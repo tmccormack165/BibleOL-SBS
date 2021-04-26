@@ -1382,3 +1382,56 @@ footer .row {
   justify-content: space-around;
   align-items: center;
 }
+#bdbcontainer {
+  position: relative;
+}
+#bdbtext {
+  position: relative;
+  background: white;
+  border: solid 1px #adadad;
+  padding: 10px;
+}
+#bdbtext bdbheb,
+#bdbtext bdbarc,
+#bdbtext heb {
+  font-family: "Ezra SIL Webfont";
+  font-size: 130%;
+}
+#bdbtext bdbheb,
+#bdbtext bdbarc {
+  display: inline-block;
+  direction: rtl;
+}
+#bdbtext div.section,
+#bdbtext div.point {
+  display: block;
+  border: 1px solid green;
+  border-radius: 5px;
+  padding: 2px 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+#bdbtext div.remarks {
+  display: block;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 2px 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+#bdbtext highlight {
+  font-style: italic;
+}
+#bdbtext transliteration {
+  color: gray;
+}
+#bdbtext ref {
+  color: navy;
+  font-weight: bold;
+}
+#bdbtext hr {
+  border: 1px solid green;
+  border-radius: 5px;
+  height: 10px;
+  background: green;
+}

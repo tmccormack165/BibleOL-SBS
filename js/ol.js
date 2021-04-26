@@ -1105,6 +1105,7 @@ var Dictionary = (function () {
         }
     }
     Dictionary.prototype.hoverForGrammar = function () {
+        var _this = this;
         var thisDict = this;
         if (useTooltip) {
             $(document).tooltip({
@@ -1114,17 +1115,18 @@ var Dictionary = (function () {
             });
         }
         else {
-            $("[data-idd]")
-                .hover(function () {
+            $("[data-idd]");
+            $("[data-idd]").on('click', function (event) {
                 var scrTop = $(window).scrollTop();
                 var qcTop = $('#textcontainer').offset().top;
+                var _a = _this.toolTipFunc(event.currentTarget, true), contents = _a[0], heading = _a[1];
                 $('.grammardisplay')
-                    .html(thisDict.toolTipFunc(this, true)[0])
+                    .html(contents)
                     .css('top', Math.max(0, scrTop - qcTop + 5))
                     .outerWidth($('#grammardisplaycontainer').outerWidth() - 25)
                     .show();
-            }, function () {
-                $('.grammardisplay').hide();
+                $('#bdbtext')
+                    .css('top', Math.max(0, scrTop - qcTop + 5));
             });
         }
     };
@@ -1135,19 +1137,12 @@ var Dictionary = (function () {
             $("[data-idd]").off("mouseenter mouseleave");
     };
     Dictionary.prototype.clickForGrammar = function () {
-        var _this = this;
-        $("[data-idd]").on('click', function (event) {
-            var _a = _this.toolTipFunc(event.currentTarget, false), contents = _a[0], heading = _a[1];
-            $('#grammar-info-label').html(heading);
-            $('#grammar-info-body').html(contents);
-            $('#grammar-info-dialog').modal('show');
-        });
     };
     Dictionary.handleDisplaySize = function (thisDict) {
         switch (resizer.getWindowSize()) {
             case 'xs':
             case 'sm':
-                thisDict.dontHoverForGrammar();
+                thisDict.hoverForGrammar();
                 break;
             default:
                 thisDict.hoverForGrammar();
@@ -1234,7 +1229,6 @@ var Dictionary = (function () {
                         if (!((featValLoc === '-')
                             || (featValLoc === '---'))) {
                             if (featName === 'g_voc_lex_utf8_variant') {
-                                $('#lemma').text(featValLoc);
                                 $('#bdbtext').html(bdb[featValLoc] || '');
                             }
                             res += "<tr>\n                                                               <td>" + map[featName] + "</td>\n                                                               <td class=\"bol-tooltip leftalign " + wordclass + "\">" + featValLoc + "</td>\n                                                           </tr>";

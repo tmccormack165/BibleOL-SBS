@@ -64,7 +64,7 @@ function show_panel2(&$title, &$text) {
 function logos() {
 ?>
       <div class="row logointro">
-        <h2>Partners behind BibleOL</h2>
+        <h2>Our Partners</h2>
       </div>
       <div class="row logopanel">
         <div class="logoimg">
@@ -74,9 +74,9 @@ function logos() {
         <div class="logoimg">
           <a class="navbar-link" href="http://pthu.nl" target="_blank"><img class="logo"  src="images/logos/pthu.png" style="width: 260px"></a></div>
         <div class="logoimg">
-          <a class="navbar-link" href="http://www.ezer.dk" target="_blank"><img class="logo" src="images/logos/ezer_web_trans_lille.png" style="width: 140px; allign: center;"></a></div>
+          <img class="logo" src="images/logos/ezer_web_trans_lille.png" style="width: 140px; allign: center;"></div>
         <div class="logoimg">
-          <a class="navbar-link"  href="http://3bmoodle.dk" target="_blank"><img class="logo" src="images/logos/3bm_logo.png" style="width: 150px"></a></div>
+          <img class="logo" src="images/logos/3bm_logo.png" style="width: 150px"></div>
       </div>
 <?php
 }
