@@ -104,14 +104,14 @@ class Mod_askemdros extends CI_Model {
 					$emdros_data[1]->get_table()->get_cell(0,0));
 		return $ms;
 	}
-		
+
 	public function getMonadsAtLevel(OlMonadSet $ms, int $hier_level) {
 		$hier = $this->db_config->dbinfo->universeHierarchy[$hier_level];
 
 		$emdros_data = $this->mql->exec("SELECT ALL OBJECTS IN $ms WHERE [$hier->type GET $hier->feat] GOqxqxqx");
-		
+
 		$sh = $emdros_data[0]->get_sheaf();
-		
+
 		$res = array();
 
 		foreach ($emdros_data[0]->get_sheaf()->get_straws() as $str) {
@@ -134,12 +134,12 @@ class Mod_askemdros extends CI_Model {
 			foreach ($paths as $p) {
 				if (empty($p)) // $path = array('')
 					return self::fullUniverse();
-			
+
 				$split_p = explode(':',$p);
 				$num = count($split_p);
 
 				assert($num<=count($this->db_config->dbinfo->universeHierarchy));
-	
+
 				$command .= "SELECT ALL OBJECTS WHERE ";
 
 				for ($i=0; $i<$num; ++$i)
@@ -151,7 +151,7 @@ class Mod_askemdros extends CI_Model {
 				$command .= " GOqxqxqx\n";
 			}
 
-			$emdros_data = $this->mql->exec($command); 
+			$emdros_data = $this->mql->exec($command);
 
 			for ($i=0; $i<$path_count; ++$i) {
 				$sh = $emdros_data[$i]->get_sheaf();
@@ -168,12 +168,12 @@ class Mod_askemdros extends CI_Model {
 		else {
 			// Use universe specified by user
 			$ms = new OlMonadSet();
-			
+
 			foreach ($use_selection as $mysel) {
 				$split_mysel = explode('/',$mysel);
 				$num = count($split_mysel);
 				assert($num==3 && is_numeric($split_mysel[1]) && is_numeric($split_mysel[2]));
-				
+
 				$ms->addOne(intval($split_mysel[1]),intval($split_mysel[2]));
 			}
 		}
@@ -195,11 +195,11 @@ class Mod_askemdros extends CI_Model {
 	private function parseQuiz(string $filename, array $use_selection = null) {
 		$this->parseQuizBasic($filename);
 
-		$sentenceSelector = isset($this->decoded_3et->sentenceSelection->mql) 
+		$sentenceSelector = isset($this->decoded_3et->sentenceSelection->mql)
 			? $this->decoded_3et->sentenceSelection->mql
 			: "[{$this->decoded_3et->sentenceSelection->object} NORETRIEVE {$this->decoded_3et->sentenceSelection->featHand}]";
 
-		$qoSelector = isset($this->decoded_3et->quizObjectSelection->mql) 
+		$qoSelector = isset($this->decoded_3et->quizObjectSelection->mql)
 			? $this->decoded_3et->quizObjectSelection->mql
 			: $this->decoded_3et->quizObjectSelection->featHand->__toString();
 
@@ -217,7 +217,7 @@ class Mod_askemdros extends CI_Model {
 				$quizid = $this->mod_statistics->startQuiz($this->mod_users->my_id(), $templid,
 														   $this->decoded_3et->selectedPaths);
 			else
-				$quizid = $this->mod_statistics->startQuiz($this->mod_users->my_id(), $templid, 
+				$quizid = $this->mod_statistics->startQuiz($this->mod_users->my_id(), $templid,
 														   self::strip_monads($use_selection));
 		}
 		else
@@ -273,7 +273,7 @@ class Mod_askemdros extends CI_Model {
 
 		return harvest($this->contents);
 	}
-	
+
 	private function parseQuizBasic(string $filename) {
 		$this->decoded_3et = $this->decodeQuiz($filename);
 
@@ -340,16 +340,39 @@ class Mod_askemdros extends CI_Model {
 
 			if ($this->quiz_data->fixedquestions>0)
 				$number_of_quizzes = $this->quiz_data->fixedquestions;
-			$this->dictionaries_json = json_encode($this->quiz_data->getNextCandidate($number_of_quizzes));
-			$this->bdb_json = json_encode(null);
+			$dic = $this->quiz_data->getNextCandidate($number_of_quizzes);
+			$this->dictionaries_json = json_encode($dic);
 			$this->quiz_data_json = json_encode($this->quiz_data);
+
+			// BEGIN -- FRI
+			$bdb = array();
+			foreach ($dic->monadObjects as $sentenceIndex) {
+				foreach ($sentenceIndex as $grammarLevel) {
+					foreach ($grammarLevel as $obj) {
+						if ((!is_null($obj->mo->features)) && array_key_exists('g_voc_lex_utf8_variant', $obj->mo->features)) {
+							$lexeme_with_variant = $obj->mo->features['g_voc_lex_utf8_variant'];
+							$bdb_entry = getBDBEntry($lexeme_with_variant);
+							if (!is_null($bdb_entry)) {
+								$bdb[$lexeme_with_variant] = $bdb_entry;
+							} else if (array_key_exists('g_lex_utf8', $obj->mo->features)) {
+								$bdb_entry = getBDBEntry($obj->mo->features['g_lex_utf8']);
+								if (!is_null($bdb_entry)) {
+									$bdb[$lexeme_with_variant] = $bdb_entry;
+								}
+							}
+						}
+					}
+				}
+			}
+			$this->bdb_json = json_encode($bdb);
+			// END -- FRI
 
 			$this->dbinfo_json = $this->db_config->dbinfo_json;
 			$this->l10n_json = $this->db_config->l10n_json;
 			$this->typeinfo_json = $this->db_config->typeinfo_json;
 		}
 		catch (MqlException $e) {
-			if (!empty($e->db_error)) 
+			if (!empty($e->db_error))
 				$error = $this->lang->line('mql_database_error_colon') . "\n$e->db_error";
 			else
 				$error = $this->lang->line('mql_compiler_error_colon') . "\n$e->compiler_error";
@@ -370,7 +393,7 @@ class Mod_askemdros extends CI_Model {
 			$this->typeinfo_json = $this->db_config->typeinfo_json;
 		}
 		catch (MqlException $e) { // TODO: Are any MQL commands executed?
-			if (!empty($e->db_error)) 
+			if (!empty($e->db_error))
 				$error = $this->lang->line('mql_database_error_colon') . "\n$e->db_error";
 			else
 				$error = $this->lang->line('mql_compiler_error_colon') . "\n$e->compiler_error";
@@ -384,7 +407,7 @@ class Mod_askemdros extends CI_Model {
 		try {
 			$this->load->library('db_config');
 			$this->setup($db, $db);
-			
+
 			$this->dbinfo_json = $this->db_config->dbinfo_json;
 			$this->l10n_json = $this->db_config->l10n_json;
 			$this->typeinfo_json = $this->db_config->typeinfo_json;
@@ -404,7 +427,7 @@ class Mod_askemdros extends CI_Model {
 						   $this->db_config->dbinfo->databaseName, $db, $this->db_config->dbinfo->objHasSurface);
 		}
 		catch (MqlException $e) { // TODO: Are any MQL commands executed?
-			if (!empty($e->db_error)) 
+			if (!empty($e->db_error))
 				$error = $this->lang->line('mql_database_error_colon') . "\n$e->db_error";
 			else
 				$error = $this->lang->line('mql_compiler_error_colon') . "\n$e->compiler_error";
@@ -429,7 +452,7 @@ class Mod_askemdros extends CI_Model {
 		$this->load->library('db_config');
 
 		self::parseQuizBasic($this->mod_quizpath->get_absolute());
-			
+
 		// Do we need this?
 		$this->dbinfo_json = $this->db_config->dbinfo_json;
 		$this->l10n_json = $this->db_config->l10n_json;
@@ -474,7 +497,7 @@ class Mod_askemdros extends CI_Model {
 		else
 			$emdros_data = $this->mql->exec("SELECT ALL OBJECTS WHERE [verse book=$book AND chapter=$chapter "
 											. "AND verse>=$vfrom AND verse<=$vto] GOqxqxqx");
-  
+
 		$sh = $emdros_data[0]->get_sheaf();
 		if ($sh->isEmpty())
 			throw new DataException($this->lang->line('no_text_found'));
@@ -493,7 +516,7 @@ class Mod_askemdros extends CI_Model {
 			$this->setup($db,$db);
 
 			$passage = $this->find_monads($book,$chapter,$vfrom,$vto);
-			
+
 			$this->load->library('dictionary', array('msets' => array($passage), 'inQuiz' => false, 'showIcons' => $showIcons));
 			$this->book_title = $this->dictionary->get_book_title();
 			$this->dictionaries_json = json_encode($this->dictionary);
@@ -522,11 +545,11 @@ class Mod_askemdros extends CI_Model {
 				}
 			}
 		}
-		// END -- FRI
 		$this->bdb_json = json_encode($bdb);
+		// END -- FRI
 		}
 		catch (MqlException $e) {
-			if (!empty($e->db_error)) 
+			if (!empty($e->db_error))
 				$error = $this->lang->line('mql_database_error_colon') . "\n$e->db_error";
 			else
 				$error = $this->lang->line('mql_compiler_error_colon') . "\n$e->compiler_error";
