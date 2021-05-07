@@ -50,7 +50,7 @@ class Ctrl_main_page extends MY_Controller {
                 $this->load->view('view_main_page', array('left_title' => $this->lang->line('new_privacy_header'),
                                                           'left' => $this->lang->line('new_privacy_intro'),
                                                           'center' => $center_text));
-        
+
                 $this->load->view('view_bottom');
             }
         }
@@ -63,8 +63,8 @@ class Ctrl_main_page extends MY_Controller {
             // $data['right_title'] = $this->mod_intro_text->right_text_title();
             // $data['right'] = $this->mod_intro_text->right_text();
             $data['logos'] = true;
-        
-            $this->load->view('view_top1', array('title'=>'Bible Online Learner'));
+
+            $this->load->view('view_top1', array('title'=>'The Bible for Linguistic Analysis'));
             $this->load->view('view_top2');
             $this->load->view('view_menu_bar', array('langselect' => true));
             $this->load->view('view_main_page',$data);
