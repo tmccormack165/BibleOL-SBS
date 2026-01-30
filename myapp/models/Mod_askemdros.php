@@ -465,9 +465,7 @@ class Mod_askemdros extends CI_Model {
 									   "ETCBC4-translit" => 2,
 									   "nestle1904" => 3);
 
-	public static function comp_books(array $a, array $b) {
-		return self::$sort_order[$a['name']] > self::$sort_order[$b['name']];
-	}
+
 
 	public function db_and_books() {
 		$this->load->library('db_config');
@@ -484,7 +482,7 @@ class Mod_askemdros extends CI_Model {
 								'loc_books'=>$loc->universe->book,
 								'order'=>$this->db_config->bookorder);
 		}
-		usort($db_books, 'Mod_askemdros::comp_books');
+		usort($db_books, function(array $a, array $b) {return self::$sort_order[$a['name']] <=> self::$sort_order[$b['name']];});
 		return $db_books;
 	}
 
