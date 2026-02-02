@@ -34,7 +34,7 @@ function getBDBEntry($lexeme_with_variant) {
 	$statement->bindValue(1, $lemma);
 	$result = $statement->execute();
 
-	$content = $result->fetchArray(SQLITE3_NUM)[0];
+	$content = $result->fetchArray(SQLITE3_NUM);
 
 	$result->finalize();
 
